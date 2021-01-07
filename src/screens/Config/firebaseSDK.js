@@ -3,19 +3,20 @@ import firebase from 'firebase'; // 4.8.1
 class FirebaseSDK {
   constructor() {
     this.init();
-    this.observeAuth();
+    //this.observeAuth();
   }
 
   init = () => {
     if (!firebase.apps.length) {
       firebase.initializeApp({
-        apiKey:'AIzaSyAPfes9_2EwZESX1puYMUv29yunzK9Ve5U',
-        authDomain:'docman-31d96.firebaseapp.com',
-        databaseURL: "https://docman-31d96.firebaseio.com",
-        projectId: "docman-31d96",
-        storageBucket: "docman-31d96.appspot.com",
-       messagingSenderId: "649332068608",
-        appId:'1:649332068608:android:08c080ee6a4e521f5323e5'
+        apiKey: 'AIzaSyA8Dp8yInWfJV_qUQdgZfknhZXDeeENFzg',
+        authDomain: 'naxechat.firebaseapp.com',
+        databaseURL: 'https://naxechat-default-rtdb.firebaseio.com',
+        projectId: 'naxechat',
+        storageBucket: 'naxechat.appspot.com',
+        messagingSenderId: '23143048525',
+        appId: "1:23143048525:web:3b9d70f2db9de05796c304",
+        measurementId: "G-TTQSG6KSY3"
       });
     }
   };
@@ -31,6 +32,13 @@ class FirebaseSDK {
         alert(message);
       }
     }
+  };
+
+  login = async (user, success_callback, failed_callback) => {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(user.email, user.password)
+      .then(success_callback, failed_callback);
   };
 
   get uid() {
@@ -83,5 +91,5 @@ class FirebaseSDK {
   }
 }
 
-FirebaseSDK.shared = new FirebaseSDK();
-export default FirebaseSDK;
+const firebaseSDK = new FirebaseSDK();
+export default firebaseSDK;
