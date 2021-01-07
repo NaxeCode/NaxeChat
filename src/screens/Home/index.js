@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 export default class HomeScreen extends React.Component {
-    static navigationOptions = ({ RootStack }) => ({
-        title: (RootStack.state.params || {}).name || "Home!"
+    static navigationOptions = ({ navigation }) => ({
+        title: (navigation.state.params || {}).name || "Home!"
     });
     
     render() {
 		return (
 			<Button
                 title="Go Login!"
-                onPress={() => this.props.navigation.navigate('Chat')}
+                onPress={() => this.navigation.navigate('Login')}
             />
 		);
 	}
