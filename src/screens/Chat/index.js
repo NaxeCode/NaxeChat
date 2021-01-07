@@ -1,6 +1,6 @@
 import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
  
 const styles = StyleSheet.create({
   container: {
@@ -10,11 +10,9 @@ const styles = StyleSheet.create({
   },
 });
  
-const ChatScreen = () => {
+const ChatScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Protected Chat Screen</Text>
-    </View>
+    <GiftedChat />
   );
 };
  
