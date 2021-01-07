@@ -7,7 +7,7 @@ import HomeScreen from './src/screens/Home';
 import ChatScreen from './src/screens/Chat';
 import LoginScreen from './src/screens/Login';
 
-const RootStack = createStackNavigator();
+const navigation = createStackNavigator();
  
 const styles = StyleSheet.create({
   container: {
@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
 const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Screen name="Login" component={LoginScreen} />
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Chat" component={ChatScreen} />
-      </RootStack.Navigator>
+      <navigation.Navigator>
+        <navigation.Screen name="Login" component={LoginScreen} />
+        <navigation.Screen name="Home" component={HomeScreen} />
+        <navigation.Screen name="Chat" component={ChatScreen} />
+      </navigation.Navigator>
     </NavigationContainer>
   );
 };
