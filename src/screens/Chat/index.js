@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { View, Text, StyleSheet } from 'react-native';
  
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +10,12 @@ const styles = StyleSheet.create({
   },
 });
  
-const App = () => {
+const ChatScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Hello React Native!</Text>
+      <Text>Protected Chat Screen</Text>
     </View>
   );
 };
  
-export default App;
+export default ChatScreen;
