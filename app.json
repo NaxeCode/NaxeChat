@@ -23,7 +23,7 @@
       "package": "com.boomy.naxechat",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/naxechat.png",
         "backgroundColor": "#FFFFFF"
       }
     },
