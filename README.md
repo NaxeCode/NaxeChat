@@ -1,5 +1,7 @@
 # NaxeChat App
 
+![Alt text](/screenshots/photo_2021-01-23_13-50-43.jpg?raw=true "Optional Title")
+
 To build from source, make a directory `src/screens/Config/` and include a `firebaseSDK.js` file in said directory, after that just add this bit of code to it:
 ```js
 import firebase from 'firebase'; // 4.8.1
