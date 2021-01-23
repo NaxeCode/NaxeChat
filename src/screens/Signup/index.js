@@ -9,7 +9,7 @@ import {
 	ImageEditor
 } from 'react-native';
 
-import firebaseSDK from '../config/firebaseSDK';
+import firebaseSDK from '../Config/firebaseSDK';
 
 export default class Signup extends React.Component {
 	state = {
