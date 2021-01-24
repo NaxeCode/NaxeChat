@@ -1,12 +1,15 @@
 import React from 'react';
-import { ImagePicker, Permissions } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+import { ImageEditor } from "expo-image-editor";
+import * as ImageManipulator from 'expo-image-manipulator';
 import {
 	StyleSheet,
 	Text,
 	TextInput,
 	View,
 	Button,
-	ImageEditor
+	Alert
 } from 'react-native';
 
 import firebaseSDK from '../Config/firebaseSDK';
@@ -36,9 +39,34 @@ export default class Signup extends React.Component {
 	onChangeTextPassword = password => this.setState({ password });
 	onChangeTextName = name => this.setState({ name });
 
+	selectPhoto = async () => {
+		// Get permissions to access the media library / camera roll
+		const response = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+		if (response.granted) {
+			const pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+			if (!pickerResult.cancelled)
+			{
+				launchEditor(pickerResult.uri);
+			}
+			else
+			{
+				Alert.alert("Please enable media library permissions");
+			}
+		}
+	}
+
+	launchEditor = (uri) => {
+		setImageUri(uri);
+		setEditorVisable(true);
+
+	}
+
 	onImageUpload = async () => {
+		const response = await ImagePicker.requestMediaLibraryPermissionsAsync();
 		const { status: cameraRollPerm } = await Permissions.askAsync(
-			Permissions.CAMERA_ROLL
+			Permissions.MEDIA_LIBRARY
 		);
 		try {
 			// only if user allows permission to camera roll
@@ -62,19 +90,16 @@ export default class Signup extends React.Component {
 					wantedwidth = wantedMaxSize * ratio;
 					wantedheight = wantedMaxSize;
 				}
+
 				let resizedUri = await new Promise((resolve, reject) => {
-					ImageEditor.cropImage(
-						pickerResult.uri,
-						{
-							offset: { x: 0, y: 0 },
-							size: { width: pickerResult.width, height: pickerResult.height },
-							displaySize: { width: wantedwidth, height: wantedheight },
-							resizeMode: 'contain'
-						},
+					ImageManipulator.manipulateAsync(pickerResult.uri, [{ rotate: 90 }, { flip: ImageManipulator.FlipType.Vertical }],
+						{ compress: 1, format: ImageManipulator.SaveFormat.PNG })
+						,
 						uri => resolve(uri),
 						() => reject()
-					);
 				});
+				
+				
 				let uploadUrl = await firebaseSDK.uploadImage(resizedUri);
 				this.setState({ avatar: uploadUrl });
 				await firebaseSDK.updateAvatar(uploadUrl);
