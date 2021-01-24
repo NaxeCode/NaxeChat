@@ -13,7 +13,6 @@ import SignupScreen from "../screens/Signup";
 import HomeScreen from "../screens/Home";
 import ChatScreen from "../screens/Chat";
 
-import { navigationRef } from "../../RootNavigation";
 import AppyBar from "./AppyBar";
 
 function Feed({ navigation }) {
@@ -56,7 +55,6 @@ function MyDrawer() {
 	return (
 		<Drawer.Navigator
 			drawerPosition="right"
-			ref={navigationRef}
 			initialRouteName="Home"
 			drawerContent={(props) => <CustomDrawerContent {...props} />}
 		>

@@ -1,7 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, Text, View } from "react-native";
 import AppyBary from "../../allScreens/AppyBar";
+import {
+	Avatar,
+	Button,
+	Card,
+	Title,
+	Paragraph,
+	TextInput,
+} from "react-native-paper";
 
 export default class HomeScreen extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -12,21 +19,39 @@ export default class HomeScreen extends React.Component {
 		return (
 			<View>
 				<AppyBary navigation={this.props.navigation} />
-				<Button
-					style={styles.buttons}
-					compact={true}
-					icon="login"
-					mode="contained"
-					onPress={() => this.props.navigation.navigate("Login")}
-				>
-					Login
-				</Button>
+				<View>
+					{/*<TextInput label="Email" value={"yo"} style={styles.img} />*/}
+				</View>
+
+				<Card>
+					<Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+				</Card>
+				<Avatar.Image
+					size={150}
+					source={require("../../../assets/boy.jpg")}
+					style={styles.img}
+				/>
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
+	text: {
+		width: 50,
+		height: 50,
+	},
+	img: {
+		marginTop: -175,
+		marginLeft: 15,
+	},
+	avatar: {
+		flex: 1,
+		justifyContent: "space-between",
+		backgroundColor: "#fff",
+		padding: 20,
+		margin: 10,
+	},
 	container: {
 		flex: 1,
 		flexDirection: "column",
