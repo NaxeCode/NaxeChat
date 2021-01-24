@@ -1,25 +1,18 @@
-import React from 'react';
-import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
+import React from "react";
+import * as Permissions from "expo-permissions";
+import * as ImagePicker from "expo-image-picker";
 import { ImageEditor } from "expo-image-editor";
-import * as ImageManipulator from 'expo-image-manipulator';
-import {
-	StyleSheet,
-	Text,
-	TextInput,
-	View,
-	Button,
-	Alert
-} from 'react-native';
+import * as ImageManipulator from "expo-image-manipulator";
+import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
 
-import firebaseSDK from '../Config/firebaseSDK';
+import firebaseSDK from "../Config/firebaseSDK";
 
 export default class Signup extends React.Component {
 	state = {
-		name: 'no name',
-		email: 'test@live.com',
-		password: '123456',
-		avatar: ''
+		name: "no name",
+		email: "test@live.com",
+		password: "123456",
+		avatar: "",
 	};
 
 	onPressCreate = async () => {
@@ -27,17 +20,17 @@ export default class Signup extends React.Component {
 			const user = {
 				name: this.state.name,
 				email: this.state.email,
-				password: this.state.password
+				password: this.state.password,
 			};
 			await firebaseSDK.createAccount(user);
 		} catch ({ message }) {
-			console.log('create account failed. catch error:' + message);
+			console.log("create account failed. catch error:" + message);
 		}
 	};
 
-	onChangeTextEmail = email => this.setState({ email });
-	onChangeTextPassword = password => this.setState({ password });
-	onChangeTextName = name => this.setState({ name });
+	onChangeTextEmail = (email) => this.setState({ email });
+	onChangeTextPassword = (password) => this.setState({ password });
+	onChangeTextName = (name) => this.setState({ name });
 
 	selectPhoto = async () => {
 		// Get permissions to access the media library / camera roll
@@ -46,22 +39,18 @@ export default class Signup extends React.Component {
 		if (response.granted) {
 			const pickerResult = await ImagePicker.launchImageLibraryAsync();
 
-			if (!pickerResult.cancelled)
-			{
+			if (!pickerResult.cancelled) {
 				launchEditor(pickerResult.uri);
-			}
-			else
-			{
+			} else {
 				Alert.alert("Please enable media library permissions");
 			}
 		}
-	}
+	};
 
 	launchEditor = (uri) => {
 		setImageUri(uri);
 		setEditorVisable(true);
-
-	}
+	};
 
 	onImageUpload = async () => {
 		const response = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -70,13 +59,13 @@ export default class Signup extends React.Component {
 		);
 		try {
 			// only if user allows permission to camera roll
-			if (cameraRollPerm === 'granted') {
+			if (cameraRollPerm === "granted") {
 				let pickerResult = await ImagePicker.launchImageLibraryAsync({
 					allowsEditing: true,
-					aspect: [4, 3]
+					aspect: [4, 3],
 				});
 				console.log(
-					'ready to upload... pickerResult json:' + JSON.stringify(pickerResult)
+					"ready to upload... pickerResult json:" + JSON.stringify(pickerResult)
 				);
 
 				var wantedMaxSize = 150;
@@ -92,21 +81,22 @@ export default class Signup extends React.Component {
 				}
 
 				let resizedUri = await new Promise((resolve, reject) => {
-					ImageManipulator.manipulateAsync(pickerResult.uri, [{ rotate: 90 }, { flip: ImageManipulator.FlipType.Vertical }],
-						{ compress: 1, format: ImageManipulator.SaveFormat.PNG })
-						,
-						uri => resolve(uri),
-						() => reject()
+					ImageManipulator.manipulateAsync(
+						pickerResult.uri,
+						[{ rotate: 90 }, { flip: ImageManipulator.FlipType.Vertical }],
+						{ compress: 1, format: ImageManipulator.SaveFormat.PNG }
+					),
+						(uri) => resolve(uri),
+						() => reject();
 				});
-				
-				
+
 				let uploadUrl = await firebaseSDK.uploadImage(resizedUri);
 				this.setState({ avatar: uploadUrl });
 				await firebaseSDK.updateAvatar(uploadUrl);
 			}
 		} catch (err) {
-			console.log('onImageUpload error:' + err.message);
-			alert('Upload image error:' + err.message);
+			console.log("onImageUpload error:" + err.message);
+			alert("Upload image error:" + err.message);
 		}
 	};
 
@@ -152,18 +142,18 @@ const styles = StyleSheet.create({
 	title: {
 		marginTop: offset,
 		marginLeft: offset,
-		fontSize: offset
+		fontSize: offset,
 	},
 	nameInput: {
 		height: offset * 2,
 		margin: offset,
 		paddingHorizontal: offset,
-		borderColor: '#111111',
+		borderColor: "#111111",
 		borderWidth: 1,
-		fontSize: offset
+		fontSize: offset,
 	},
 	buttonText: {
 		marginLeft: offset,
-		fontSize: 42
-	}
+		fontSize: 42,
+	},
 });

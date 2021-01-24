@@ -1,25 +1,25 @@
-import React, {Fragment} from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
-import firebaseSDK from '../Config/firebaseSDK';
+import React, { Fragment } from "react";
+import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import firebaseSDK from "../Config/firebaseSDK";
 
 export default class LoginScreen extends React.Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: 'RN + Firebase Chat App'
-    });
-    
-    state = {
-		name: 'Alice',
-		email: 'test@exm.com',
-		password: '123456',
-		avatar: ''
-    };
-    
-    onPressLogin = async () => {
+	static navigationOptions = ({ navigation }) => ({
+		title: "RN + Firebase Chat App",
+	});
+
+	state = {
+		name: "Alice",
+		email: "test@exm.com",
+		password: "123456",
+		avatar: "",
+	};
+
+	onPressLogin = async () => {
 		const user = {
 			name: this.state.name,
 			email: this.state.email,
 			password: this.state.password,
-			avatar: this.state.avatar
+			avatar: this.state.avatar,
 		};
 
 		const response = firebaseSDK.login(
@@ -27,25 +27,25 @@ export default class LoginScreen extends React.Component {
 			this.loginSuccess,
 			this.loginFailed
 		);
-    };
-    
-    loginSuccess = () => {
-		console.log('login successful, navigate to chat.');
-		this.props.navigation.navigate('Chat', {
+	};
+
+	loginSuccess = () => {
+		console.log("login successful, navigate to chat.");
+		this.props.navigation.navigate("Chat", {
 			name: this.state.name,
 			email: this.state.email,
-			avatar: this.state.avatar
+			avatar: this.state.avatar,
 		});
-    };
-    
-    loginFailed = () => {
-		alert('Login failure. Please tried again.');
-    };
-    
-    onChangeTextEmail = email => this.setState({ email });
-    onChangeTextPassword = password => this.setState({ password });
-    
-    render() {
+	};
+
+	loginFailed = () => {
+		alert("Login failure. Please tried again.");
+	};
+
+	onChangeTextEmail = (email) => this.setState({ email });
+	onChangeTextPassword = (password) => this.setState({ password });
+
+	render() {
 		return (
 			<View>
 				<Text style={styles.title}>Email:</Text>
@@ -70,7 +70,7 @@ export default class LoginScreen extends React.Component {
 				<Button
 					title="Signup"
 					style={styles.buttonText}
-					onPress={() => this.props.navigation.navigate('Signup')}
+					onPress={() => this.props.navigation.navigate("Signup")}
 				/>
 			</View>
 		);
@@ -81,18 +81,18 @@ const styles = StyleSheet.create({
 	title: {
 		marginTop: 16,
 		marginLeft: 16,
-		fontSize: 16
+		fontSize: 16,
 	},
 	nameInput: {
 		height: 16 * 2,
 		margin: 16,
 		paddingHorizontal: 16,
-		borderColor: '#111111',
+		borderColor: "#111111",
 		borderWidth: 1,
-		fontSize: 16
+		fontSize: 16,
 	},
 	buttonText: {
 		marginLeft: 16,
-		fontSize: 42
-	}
+		fontSize: 42,
+	},
 });
