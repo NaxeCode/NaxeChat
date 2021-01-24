@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import AppyBary from "../../allScreens/AppyBar";
 import {
 	Avatar,
@@ -10,39 +10,81 @@ import {
 	TextInput,
 } from "react-native-paper";
 
+const MyComponent = () => {
+	const [text, setText] = React.useState("");
+
+	return (
+		<TextInput
+			style={styles.status}
+			mode="outlined"
+			label="Set Status :3c"
+			value={text}
+			onChangeText={(text) => setText(text)}
+		/>
+	);
+};
+
 export default class HomeScreen extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: "Naxe Chat App",
 	});
 
 	render() {
+		let deviceWidth = Dimensions.get("window").width;
 		return (
 			<View>
 				<AppyBary navigation={this.props.navigation} />
-				<View>
-					{/*<TextInput label="Email" value={"yo"} style={styles.img} />*/}
-				</View>
-
+				{/* All components have to be below card to show up */}
 				<Card>
 					<Card.Cover source={{ uri: "https://picsum.photos/700" }} />
 				</Card>
 				<Avatar.Image
-					size={150}
+					size={135}
 					source={require("../../../assets/boy.jpg")}
 					style={styles.avatar}
 				/>
+				<View>
+					<Text style={styles.name}>Naxe</Text>
+					<Text style={styles.nameTag}>NaxeCode#505050</Text>
+					<MyComponent />
+					{/*<TextInput label="Email" value={"yo"} style={styles.img} />*/}
+				</View>
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	text: {
-		width: 50,
-		height: 50,
+	status: {
+		textAlign: "center",
+		position: "relative",
+		width: Dimensions.get("window").width / 2,
+		height: Dimensions.get("window").width / 12,
+		right: -Dimensions.get("window").width / 2.4,
+		top: -Dimensions.get("window").height / 6,
+	},
+	name: {
+		fontSize: 25,
+		color: "#FFF",
+		textShadowColor: "black",
+		textShadowRadius: 3,
+		textAlign: "center",
+		position: "relative",
+		right: -Dimensions.get("window").width / 6,
+		top: -Dimensions.get("window").height / 6,
+	},
+	nameTag: {
+		fontSize: 18,
+		color: "#EA8220",
+		textShadowColor: "black",
+		textShadowRadius: 3,
+		textAlign: "center",
+		position: "relative",
+		right: -Dimensions.get("window").width / 6,
+		top: -Dimensions.get("window").height / 6,
 	},
 	avatar: {
-		marginTop: -175,
+		marginTop: -165,
 		marginLeft: 15,
 	},
 	container: {
