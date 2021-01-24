@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
 				<Avatar.Image
 					size={150}
 					source={require("../../../assets/boy.jpg")}
-					style={styles.img}
+					style={styles.avatar}
 				/>
 			</View>
 		);
@@ -41,16 +41,9 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 	},
-	img: {
+	avatar: {
 		marginTop: -175,
 		marginLeft: 15,
-	},
-	avatar: {
-		flex: 1,
-		justifyContent: "space-between",
-		backgroundColor: "#fff",
-		padding: 20,
-		margin: 10,
 	},
 	container: {
 		flex: 1,
