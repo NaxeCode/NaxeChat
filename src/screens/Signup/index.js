@@ -3,7 +3,8 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import { ImageEditor } from "expo-image-editor";
 import * as ImageManipulator from "expo-image-manipulator";
-import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, TextInput, View, Alert } from "react-native";
+import { Button } from "react-native-paper";
 
 import firebaseSDK from "../Config/firebaseSDK";
 
@@ -123,15 +124,15 @@ export default class Signup extends React.Component {
 					value={this.state.name}
 				/>
 				<Button
-					title="Signup"
-					style={styles.buttonText}
-					onPress={this.onPressCreate}
-				/>
-				<Button
-					title="Upload Avatar"
-					style={styles.buttonText}
-					onPress={this.onImageUpload}
-				/>
+					icon="camera"
+					mode="contained"
+					onPress={() => this.onImageUpload}
+				>
+					Upload Avatar
+				</Button>
+				<Button icon="login" mode="contained" onPress={this.onPressCreate}>
+					Signup
+				</Button>
 			</View>
 		);
 	}

@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Button } from "react-native-paper";
 import firebaseSDK from "../Config/firebaseSDK";
 
 export default class LoginScreen extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
-		title: "RN + Firebase Chat App",
+		title: "Naxe Chat App",
 	});
 
 	state = {
@@ -47,7 +48,7 @@ export default class LoginScreen extends React.Component {
 
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
 				<Text style={styles.title}>Email:</Text>
 				<TextInput
 					style={styles.nameInput}
@@ -62,22 +63,37 @@ export default class LoginScreen extends React.Component {
 					value={this.state.password}
 				/>
 				<Button
-					title="Login"
-					style={styles.buttonText}
+					style={styles.buttons}
+					compact={true}
+					icon="login"
+					mode="contained"
 					onPress={this.onPressLogin}
-				/>
-
+				>
+					Login
+				</Button>
 				<Button
-					title="Signup"
-					style={styles.buttonText}
+					style={styles.buttons}
+					icon="camera"
+					mode="contained"
 					onPress={() => this.props.navigation.navigate("Signup")}
-				/>
+				>
+					Signup
+				</Button>
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: "column",
+		alignItems: "center",
+	},
+	buttons: {
+		marginTop: 16,
+		flexDirection: "column",
+	},
 	title: {
 		marginTop: 16,
 		marginLeft: 16,

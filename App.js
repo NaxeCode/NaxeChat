@@ -1,33 +1,40 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import {
+	Appbar,
+	DefaultTheme,
+	Provider as PaperProvider,
+} from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-import LoginScreen from "./src/screens/Login";
-import SignupScreen from "./src/screens/Signup";
-import HomeScreen from "./src/screens/Home";
-import ChatScreen from "./src/screens/Chat";
+import NaviDraw from "./src/allScreens/NaviDraw";
 
-const navigation = createStackNavigator();
+import {
+	createDrawerNavigator,
+	DrawerNavigatorItems,
+	DrawerItem,
+	DrawerContentScrollView,
+} from "@react-navigation/drawer";
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
+const Drawer = createDrawerNavigator();
+
+const theme = {
+	...DefaultTheme,
+	roundness: 2,
+	colors: {
+		...DefaultTheme.colors,
+		primary: "#3498db",
+		accent: "#f1c40f",
 	},
-});
+};
 
 const App = () => {
 	return (
-		<NavigationContainer>
-			<navigation.Navigator>
-				<navigation.Screen name="Login" component={LoginScreen} />
-				<navigation.Screen name="Signup" component={SignupScreen} />
-				<navigation.Screen name="Home" component={HomeScreen} />
-				<navigation.Screen name="Chat" component={ChatScreen} />
-			</navigation.Navigator>
-		</NavigationContainer>
+		<PaperProvider theme={theme}>
+			<NavigationContainer>
+				<NaviDraw />
+			</NavigationContainer>
+		</PaperProvider>
 	);
 };
 
