@@ -74,7 +74,7 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
 	avatar: {
-		marginTop: -50,
+		marginTop: -165,
 		marginLeft: 15,
 	},
 	name: {
