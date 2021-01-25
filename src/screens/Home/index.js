@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import AppyBary from "../../allScreens/AppyBar";
+import Bar from "../../allScreens/AppyBar";
 import {
 	Avatar,
 	Button,
@@ -10,7 +10,7 @@ import {
 	TextInput,
 } from "react-native-paper";
 
-const MyComponent = () => {
+const StatusBar = () => {
 	const [text, setText] = React.useState("");
 
 	return (
@@ -24,6 +24,34 @@ const MyComponent = () => {
 	);
 };
 
+const AvatarIcon = () => {
+	return (
+		<Avatar.Image
+			size={135}
+			source={require("../../../assets/boy.jpg")}
+			style={styles.avatar}
+		/>
+	);
+};
+
+const BackgroundBanner = () => {
+	return (
+		<View style={styles.banner}>
+			<Card>
+				<Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+			</Card>
+		</View>
+	);
+};
+
+const Name = () => {
+	return <Text style={styles.name}>Naxe</Text>;
+};
+
+const NameTag = () => {
+	return <Text style={styles.nameTag}>NaxeCode#505050</Text>;
+};
+
 export default class HomeScreen extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: "Naxe Chat App",
@@ -33,35 +61,21 @@ export default class HomeScreen extends React.Component {
 		let deviceWidth = Dimensions.get("window").width;
 		return (
 			<View>
-				<AppyBary navigation={this.props.navigation} />
-				{/* All components have to be below card to show up */}
-				<Card>
-					<Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-				</Card>
-				<Avatar.Image
-					size={135}
-					source={require("../../../assets/boy.jpg")}
-					style={styles.avatar}
-				/>
-				<View>
-					<Text style={styles.name}>Naxe</Text>
-					<Text style={styles.nameTag}>NaxeCode#505050</Text>
-					<MyComponent />
-					{/*<TextInput label="Email" value={"yo"} style={styles.img} />*/}
-				</View>
+				<Bar navigation={this.props.navigation} />
+				<BackgroundBanner />
+				<AvatarIcon />
+				<Name />
+				<NameTag />
+				<StatusBar />
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	status: {
-		textAlign: "center",
-		position: "relative",
-		width: Dimensions.get("window").width / 2,
-		height: Dimensions.get("window").width / 12,
-		right: -Dimensions.get("window").width / 2.4,
-		top: -Dimensions.get("window").height / 6,
+	avatar: {
+		marginTop: -50,
+		marginLeft: 15,
 	},
 	name: {
 		fontSize: 25,
@@ -83,10 +97,18 @@ const styles = StyleSheet.create({
 		right: -Dimensions.get("window").width / 6,
 		top: -Dimensions.get("window").height / 6,
 	},
-	avatar: {
-		marginTop: -165,
-		marginLeft: 15,
+	status: {
+		textAlign: "center",
+		position: "relative",
+		width: Dimensions.get("window").width / 2,
+		height: Dimensions.get("window").width / 12,
+		right: -Dimensions.get("window").width / 2.4,
+		top: -Dimensions.get("window").height / 6,
 	},
+	banner: {
+		zIndex: 0,
+	},
+
 	container: {
 		flex: 1,
 		flexDirection: "column",
