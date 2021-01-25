@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import Bar from "../../allScreens/AppyBar";
 import {
 	Avatar,
@@ -26,11 +26,7 @@ const StatusBar = () => {
 
 const AvatarIcon = () => {
 	return (
-		<Avatar.Image
-			size={135}
-			source={require("../../../assets/boy.jpg")}
-			style={styles.avatar}
-		/>
+		<Image style={styles.avatar} source={require("../../../assets/boy.jpg")} />
 	);
 };
 
@@ -40,6 +36,22 @@ const BackgroundBanner = () => {
 			<Card>
 				<Card.Cover source={{ uri: "https://picsum.photos/700" }} />
 			</Card>
+		</View>
+	);
+};
+
+const Btns = () => {
+	return (
+		<View style={styles.butt}>
+			<Button mode="contained" onPress={() => console.log("Pressed")}>
+				<Text style={styles.buttTxt}>Add Friend</Text>
+			</Button>
+			<Button mode="contained" onPress={() => console.log("Pressed")}>
+				<Text style={styles.buttTxt}>Message</Text>
+			</Button>
+			<Button mode="contained" onPress={() => console.log("Pressed")}>
+				<Text style={styles.buttTxt}>Whisper</Text>
+			</Button>
 		</View>
 	);
 };
@@ -67,13 +79,27 @@ export default class HomeScreen extends React.Component {
 				<Name />
 				<NameTag />
 				<StatusBar />
+				<Btns />
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
+	buttTxt: {
+		fontSize: 8,
+	},
+	butt: {
+		alignItems: "flex-end",
+		flexDirection: "row",
+		justifyContent: "center",
+		marginTop: -120,
+		marginLeft: 130,
+	},
 	avatar: {
+		borderRadius: 20,
+		width: 135,
+		height: 135,
 		marginTop: -165,
 		marginLeft: 15,
 	},
@@ -81,7 +107,7 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		color: "#FFF",
 		textShadowColor: "black",
-		textShadowRadius: 3,
+		textShadowRadius: 4,
 		textAlign: "center",
 		position: "relative",
 		right: -Dimensions.get("window").width / 6,
@@ -91,7 +117,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		color: "#EA8220",
 		textShadowColor: "black",
-		textShadowRadius: 3,
+		textShadowRadius: 4,
 		textAlign: "center",
 		position: "relative",
 		right: -Dimensions.get("window").width / 6,
