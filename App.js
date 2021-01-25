@@ -20,12 +20,14 @@ const Drawer = createDrawerNavigator();
 
 const theme = {
 	...DefaultTheme,
-	roundness: 2,
+	roundness: 15,
 	colors: {
 		...DefaultTheme.colors,
-		background: "#FF3467",
-		primary: "#3498db",
-		accent: "#f1c40f",
+		background: "#FFFFFF",
+		primary: "#C1C0E8",
+		accent: "#F0F0FA",
+		surface: "#F0F0FA",
+		disabled: "#F0F0FA",
 	},
 };
 

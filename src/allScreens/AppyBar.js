@@ -6,7 +6,7 @@ export default class AppyBar extends React.Component {
 	render() {
 		console.log(this.props.navigation);
 		return (
-			<Appbar>
+			<Appbar.Header>
 				<Appbar.Action
 					icon="alien"
 					onPress={() => console.log("Pressed archive")}
@@ -21,7 +21,7 @@ export default class AppyBar extends React.Component {
 					icon="cog"
 					onPress={() => this.props.navigation.toggleDrawer()}
 				/>
-			</Appbar>
+			</Appbar.Header>
 		);
 	}
 }
