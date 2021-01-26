@@ -15,9 +15,19 @@ const StatusBar = () => {
 
 	return (
 		<TextInput
+			raised
+			theme={{
+				roundness: 5,
+				colors: {
+					placeholder: "#8C8C8C",
+					text: "#FF343F",
+					primary: "transparent",
+					underlineColor: "transparent",
+					selectionColor: "transparent",
+				},
+			}}
 			style={styles.status}
 			mode="outlined"
-			label="Set Status :3c"
 			value={text}
 			onChangeText={(text) => setText(text)}
 		/>
@@ -28,6 +38,7 @@ export default StatusBar;
 
 const styles = StyleSheet.create({
 	status: {
+		backgroundColor: "rgba(45, 44, 45, 0.8)",
 		textAlign: "center",
 		position: "relative",
 		width: Dimensions.get("window").width / 2,
