@@ -1,12 +1,5 @@
 import React from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Dimensions,
-	Image,
-	StatusBar,
-} from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import Bar from "../../allScreens/AppyBar";
 import {
 	Avatar,
@@ -23,11 +16,12 @@ import Name from "./Name";
 import NameTag from "./NameTag";
 import NexesBar from "./NexesBar";
 import ProfileCard from "./ProfileCard";
+import DisplayScreen from "./DisplayScreen";
+import StatusBar from "./StatusBar";
 
 export default class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { diary: true };
 	}
 	static navigationOptions = ({ navigation }) => ({
 		title: "Naxe Chat App",
@@ -35,43 +29,13 @@ export default class HomeScreen extends React.Component {
 
 	render() {
 		let deviceWidth = Dimensions.get("window").width;
-		let displayScreen;
-		if (this.state.diary) {
-			displayScreen = <DiaryScreen />;
-		} else {
-			displayScreen = <AboutMeScreen />;
-		}
+
 		return (
 			<View>
 				<Bar navigation={this.props.navigation} />
 				<ProfileCard />
-				<StatusBar />
 				<NexesBar />
-				<Button
-					raised
-					theme={{ roundness: 0 }}
-					mode="contained"
-					onPress={() => {
-						if (!this.state.diary) {
-							this.setState({ diary: true });
-						}
-					}}
-				>
-					<Text>Diary</Text>
-				</Button>
-				<Button
-					raised
-					theme={{ roundness: 0 }}
-					mode="contained"
-					onPress={() => {
-						if (this.state.diary) {
-							this.setState({ diary: false });
-						}
-					}}
-				>
-					<Text>About Me</Text>
-				</Button>
-				{displayScreen}
+				<DisplayScreen />
 			</View>
 		);
 	}

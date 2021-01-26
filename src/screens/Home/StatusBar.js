@@ -24,7 +24,7 @@ const StatusBar = () => {
 	);
 };
 
-export default Name;
+export default StatusBar;
 
 const styles = StyleSheet.create({
 	status: {

@@ -12,6 +12,7 @@ import {
 
 import Name from "./Name";
 import NameTag from "./NameTag";
+import StatusBar from "./StatusBar";
 
 const ProfileCard = () => {
 	return (
@@ -20,7 +21,8 @@ const ProfileCard = () => {
 			<AvatarIcon />
 			<Name />
 			<NameTag />
-			<Btns />
+			<StatusBar />
+			<Interact />
 		</View>
 	);
 };
@@ -41,9 +43,9 @@ const AvatarIcon = () => {
 	);
 };
 
-const Btns = () => {
+const Interact = () => {
 	return (
-		<View style={styles.butt}>
+		<View style={styles.containerButton}>
 			<Button mode="contained" onPress={() => console.log("Pressed")}>
 				<Text style={styles.buttTxt}>Add Friend</Text>
 			</Button>
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
 	buttTxt: {
 		fontSize: 8,
 	},
-	butt: {
+	containerButton: {
 		alignItems: "flex-end",
 		flexDirection: "row",
 		justifyContent: "center",
