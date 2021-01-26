@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		marginLeft: -5,
 	},
 	nexBar: {
-		marginTop: 25,
+		marginTop: 22,
 	},
 	nexBarBttn: {
 		marginLeft: 35,

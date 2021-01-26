@@ -37,7 +37,7 @@ export default class HomeScreen extends React.Component {
 
 		return (
 			<View style={styles.container}>
-				<View style={styles.content}>
+				<View style={styles.contentButtons}>
 					<Button
 						style={styles.navigationButtons}
 						raised
@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
 						<Text>About Me</Text>
 					</Button>
 				</View>
-				<View style={styles.content}>{displayScreen}</View>
+				<View>{displayScreen}</View>
 			</View>
 		);
 	}
@@ -81,11 +81,18 @@ const styles = StyleSheet.create({
 	content: {
 		flexDirection: "row",
 		justifyContent: "center",
+		marginTop: 150,
+		marginLeft: 0,
+	},
+
+	contentButtons: {
+		flexDirection: "row",
+		justifyContent: "space-between",
 		marginTop: 0,
 		marginLeft: 0,
 	},
 
 	navigationButtons: {
-		width: 150,
+		width: 200,
 	},
 });
