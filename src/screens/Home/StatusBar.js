@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import {
 	Avatar,
@@ -9,32 +9,74 @@ import {
 	TextInput,
 	Appbar,
 } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const StatusBar = () => {
-	const [text, setText] = React.useState("");
+export default class StatusBar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			text: "",
+		};
+	}
 
-	return (
-		<TextInput
-			raised
-			theme={{
-				roundness: 5,
-				colors: {
-					placeholder: "#8C8C8C",
-					text: "#FF343F",
-					primary: "transparent",
-					underlineColor: "transparent",
-					selectionColor: "transparent",
-				},
-			}}
-			style={styles.status}
-			mode="outlined"
-			value={text}
-			onChangeText={(text) => setText(text)}
-		/>
-	);
+	componentDidMount() {
+		AsyncStorage.getItem("text")
+			.then((value) => {
+				this.setState({ text: value });
+			})
+			.done();
+	}
+
+	render() {
+		let text = this.state.text;
+		return (
+			<View>
+				<TextInput
+					raised
+					theme={{
+						roundness: 5,
+						colors: {
+							placeholder: "#8C8C8C",
+							text: "#FF343F",
+							primary: "transparent",
+							underlineColor: "transparent",
+							selectionColor: "transparent",
+						},
+					}}
+					style={styles.status}
+					mode="outlined"
+					value={text}
+					onBlur={() => {
+						storeData(this.state.text);
+						getData();
+					}}
+					onChangeText={(text) => this.setState({ text })}
+				/>
+			</View>
+		);
+	}
+}
+
+const storeData = async (value) => {
+	try {
+		await AsyncStorage.setItem("text", value);
+	} catch (e) {
+		// saving error
+	}
 };
 
-export default StatusBar;
+const getData = async () => {
+	try {
+		const value = await AsyncStorage.getItem("text");
+		if (value !== null) {
+			// value previously stored
+			console.log(value);
+			return value;
+		}
+	} catch (e) {
+		// error reading value
+	}
+};
 
 const styles = StyleSheet.create({
 	status: {
