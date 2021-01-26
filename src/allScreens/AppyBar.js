@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 export default class AppyBar extends React.Component {
 	render() {
 		return (
-			<Appbar>
+			<Appbar.Header>
 				<Appbar.Action
 					icon="alien"
 					onPress={() => console.log("Pressed archive")}
@@ -20,7 +20,7 @@ export default class AppyBar extends React.Component {
 					icon="cog"
 					onPress={() => this.props.navigation.toggleDrawer()}
 				/>
-			</Appbar>
+			</Appbar.Header>
 		);
 	}
 }
