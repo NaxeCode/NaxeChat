@@ -1,45 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import Bar from "../../allScreens/AppyBar";
-import {
-	Avatar,
-	Button,
-	Card,
-	Title,
-	Paragraph,
-	TextInput,
-	Appbar,
-} from "react-native-paper";
-import DiaryScreen from "../../allScreens/DiaryScreen";
-import AboutMeScreen from "../../allScreens/AboutMeScreen";
-import Name from "./Name";
-import NameTag from "./NameTag";
 import NexesBar from "./NexesBar";
 import ProfileCard from "./ProfileCard";
 import DisplayScreen from "./DisplayScreen";
-import StatusBar from "./StatusBar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default class HomeScreen extends React.Component {
-	constructor(props) {
-		super(props);
+const navigationOptions = ({ navigation }) => ({
+	title: "Naxe Chat App",
+});
+
+const HomeScreen = ({ props, navigation }) => {
+	const [name, setName] = useState("jeff");
+	const [NumberHolder, setNumber] = useState();
+	const [email, setEmail] = useState("");
+	const [avatar, setAvatar] = useState("");
+
+	useEffect(() => {
+		getUserID(NumberHolder, setNumber);
+	}, []);
+
+	let deviceWidth = Dimensions.get("window").width;
+	let numb = NumberHolder;
+	return (
+		<View>
+			<Bar navigation={navigation} />
+			<ProfileCard userID={numb} />
+			<NexesBar />
+			<DisplayScreen />
+		</View>
+	);
+};
+
+export default HomeScreen;
+
+const getUserID = async (numb, setnumb) => {
+	try {
+		//await AsyncStorage.removeItem("userID");
+		const value = await AsyncStorage.getItem("userID");
+		if (value !== null) {
+			console.log("fetching userID successful, setting userID = " + value);
+			setnumb(value);
+		} else {
+			let randomUserID = GenerateRandomNumber();
+			console.log("userID is null, creating new userID = " + randomUserID);
+			setnumb(randomUserID);
+			storeUserID(numb.toString());
+		}
+	} catch (e) {
+		// error reading value
 	}
-	static navigationOptions = ({ navigation }) => ({
-		title: "Naxe Chat App",
-	});
+};
 
-	render() {
-		let deviceWidth = Dimensions.get("window").width;
-
-		return (
-			<View>
-				<Bar navigation={this.props.navigation} />
-				<ProfileCard />
-				<NexesBar />
-				<DisplayScreen />
-			</View>
-		);
+const storeUserID = async (value) => {
+	try {
+		await AsyncStorage.setItem("userID", value);
+	} catch (e) {
+		// saving error
 	}
-}
+};
+
+const GenerateRandomNumber = () => {
+	var RandomNumber = Math.floor(Math.random() * 9999999) + 1000000;
+	return RandomNumber;
+};
 
 const styles = StyleSheet.create({
 	contentBelow: {

@@ -10,8 +10,8 @@ import {
 	Appbar,
 } from "react-native-paper";
 
-const NameTag = () => {
-	return <Text style={styles.nameTag}>NaxeCode#505050</Text>;
+const NameTag = ({ userID }) => {
+	return <Text style={styles.nameTag}>{userID}</Text>;
 };
 
 export default NameTag;

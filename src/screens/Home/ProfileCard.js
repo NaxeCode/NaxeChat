@@ -14,13 +14,13 @@ import Name from "./Name";
 import NameTag from "./NameTag";
 import StatusBar from "./StatusBar";
 
-const ProfileCard = () => {
+const ProfileCard = ({ userID }) => {
 	return (
 		<View>
 			<BackgroundBanner />
 			<AvatarIcon />
 			<Name />
-			<NameTag />
+			<NameTag userID={userID} />
 			<StatusBar />
 			<Interact />
 		</View>

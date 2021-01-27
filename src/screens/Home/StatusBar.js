@@ -22,7 +22,8 @@ export default class StatusBar extends React.Component {
 	componentDidMount() {
 		AsyncStorage.getItem("text")
 			.then((value) => {
-				this.setState({ text: value });
+				if (value != null) this.setState({ text: value });
+				else this.setState({ text: "" });
 			})
 			.done();
 	}

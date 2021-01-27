@@ -31,8 +31,8 @@ export default class LoginScreen extends React.Component {
 	};
 
 	loginSuccess = () => {
-		console.log("login successful, navigate to chat.");
-		this.props.navigation.navigate("Chat", {
+		console.log("login successful, navigate to Profile.");
+		this.props.navigation.navigate("Home", {
 			name: this.state.name,
 			email: this.state.email,
 			avatar: this.state.avatar,
