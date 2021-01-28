@@ -1,39 +1,19 @@
-import React from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Dimensions,
-	Image,
-	StatusBar,
-} from "react-native";
-import Bar from "../../allScreens/AppyBar";
-import {
-	Avatar,
-	Button,
-	Card,
-	Title,
-	Paragraph,
-	TextInput,
-	Appbar,
-} from "react-native-paper";
-import DiaryScreen from "../../allScreens/DiaryScreen";
-import AboutMeScreen from "../../allScreens/AboutMeScreen";
-import Name from "./Name";
-import NameTag from "./NameTag";
-import NexesBar from "./NexesBar";
-import ProfileCard from "./ProfileCard";
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { Button } from 'react-native-paper'
+import DiaryScreen from '../../allScreens/DiaryScreen'
+import AboutMeScreen from '../../allScreens/AboutMeScreen'
 
 export default class HomeScreen extends React.Component {
 	constructor(props) {
-		super(props);
-		this.state = { diary: true };
+		super(props)
+		this.state = { diary: true }
 	}
 
 	render() {
-		let displayScreen;
-		if (this.state.diary) displayScreen = <DiaryScreen />;
-		else displayScreen = <AboutMeScreen />;
+		let displayScreen
+		if (this.state.diary) displayScreen = <DiaryScreen />
+		else displayScreen = <AboutMeScreen />
 
 		return (
 			<View style={styles.container}>
@@ -45,7 +25,7 @@ export default class HomeScreen extends React.Component {
 						mode="contained"
 						onPress={() => {
 							if (!this.state.diary) {
-								this.setState({ diary: true });
+								this.setState({ diary: true })
 							}
 						}}
 					>
@@ -58,7 +38,7 @@ export default class HomeScreen extends React.Component {
 						mode="contained"
 						onPress={() => {
 							if (this.state.diary) {
-								this.setState({ diary: false });
+								this.setState({ diary: false })
 							}
 						}}
 					>
@@ -67,27 +47,27 @@ export default class HomeScreen extends React.Component {
 				</View>
 				<View>{displayScreen}</View>
 			</View>
-		);
+		)
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: "center",
+		justifyContent: 'center',
 		marginTop: 10,
 		marginLeft: 0,
 	},
 
 	content: {
-		flexDirection: "row",
-		justifyContent: "center",
+		flexDirection: 'row',
+		justifyContent: 'center',
 		marginTop: 150,
 		marginLeft: 0,
 	},
 
 	contentButtons: {
-		flexDirection: "row",
-		justifyContent: "space-between",
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 		marginTop: 0,
 		marginLeft: 0,
 	},
@@ -95,4 +75,4 @@ const styles = StyleSheet.create({
 	navigationButtons: {
 		width: 200,
 	},
-});
+})
