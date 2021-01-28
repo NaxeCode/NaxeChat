@@ -10,8 +10,8 @@ import {
 	Appbar,
 } from "react-native-paper";
 
-const Name = () => {
-	return <Text style={styles.name}>Naxe</Text>;
+const Name = ({ nameID }) => {
+	return <Text style={styles.name}>{nameID.toString()}</Text>;
 };
 
 export default Name;

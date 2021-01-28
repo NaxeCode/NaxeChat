@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+// @flow
+import { useEffect, useState } from "react";
+import * as React from 'react';
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import Bar from "../../allScreens/AppyBar";
 import NexesBar from "./NexesBar";
@@ -10,22 +12,26 @@ const navigationOptions = ({ navigation }) => ({
 	title: "Naxe Chat App",
 });
 
-const HomeScreen = ({ props, navigation }) => {
-	const [name, setName] = useState("jeff");
-	const [NumberHolder, setNumber] = useState();
+const HomeScreen = ({ props, navigation}: Object): React.Element<any> => {
+	const [Name, setName] = useState("");
+	const [NumberHolder: Number, setNumber] = useState(0);
 	const [email, setEmail] = useState("");
 	const [avatar, setAvatar] = useState("");
 
 	useEffect(() => {
-		getUserID(NumberHolder, setNumber);
+		async function setVars() {
+			// await AsyncStorage.removeItem("nameID");
+			await getNameID(Name, setName);
+			await getUserID(NumberHolder, setNumber);
+		}
+		setVars();
 	}, []);
 
 	let deviceWidth = Dimensions.get("window").width;
-	let numb = NumberHolder;
 	return (
 		<View>
 			<Bar navigation={navigation} />
-			<ProfileCard userID={numb} />
+			<ProfileCard userID={NumberHolder} nameID={Name} />
 			<NexesBar />
 			<DisplayScreen />
 		</View>
@@ -34,7 +40,56 @@ const HomeScreen = ({ props, navigation }) => {
 
 export default HomeScreen;
 
-const getUserID = async (numb, setnumb) => {
+function pickRandom(): string {
+	let list: Array<string> = ["Pooter", "Howard", "Maddie", "Sans", "Butterlicker", "Bigfish", "Goopgoopgoop", "ieatfruit"];
+	let name: string = list[Math.floor(Math.random() * list.length)]
+	return name;
+}
+
+function generateName(): string {
+		// Pick a random name from each list
+		const firstName: string = pickRandom();
+
+		// Use a template literal to format the full name
+		console.log("my name " + firstName);
+		return firstName; //firstName + " " + lastName;
+}
+
+const getNameID = async (name, setName) => {
+	try {
+		const value = await AsyncStorage.getItem("nameID");
+		if (value !== null) {
+			let currName: string = value;
+			console.log(
+				"fetching nameID successful, setting nameID = " + value
+			);
+			setName(value);
+		} else {
+			let randomNameID = generateName();
+			console.log("nameID is null, creating new nameID = " + randomNameID);
+			console.log(randomNameID);
+			setName(randomNameID);
+			storeNameID(name);
+		}
+	} catch (e) {
+		// error reading value
+	}
+};
+
+const storeNameID = async (value) => {
+	try {
+		await AsyncStorage.setItem("nameID", value);
+	} catch (e) {
+		// saving error
+	}
+};
+
+const GenerateRandomNumber = () => {
+	var RandomNumber = Math.floor(Math.random() * 9999999) + 1000000;
+	return RandomNumber;
+};
+
+const getUserID = async (numb: number, setnumb) => {
 	try {
 		//await AsyncStorage.removeItem("userID");
 		const value = await AsyncStorage.getItem("userID");
@@ -42,7 +97,7 @@ const getUserID = async (numb, setnumb) => {
 			console.log("fetching userID successful, setting userID = " + value);
 			setnumb(value);
 		} else {
-			let randomUserID = GenerateRandomNumber();
+			let randomUserID: number = GenerateRandomNumber();
 			console.log("userID is null, creating new userID = " + randomUserID);
 			setnumb(randomUserID);
 			storeUserID(numb.toString());
@@ -52,17 +107,12 @@ const getUserID = async (numb, setnumb) => {
 	}
 };
 
-const storeUserID = async (value) => {
+const storeUserID = async (value: string) => {
 	try {
 		await AsyncStorage.setItem("userID", value);
 	} catch (e) {
 		// saving error
 	}
-};
-
-const GenerateRandomNumber = () => {
-	var RandomNumber = Math.floor(Math.random() * 9999999) + 1000000;
-	return RandomNumber;
 };
 
 const styles = StyleSheet.create({
